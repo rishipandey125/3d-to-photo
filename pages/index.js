@@ -62,7 +62,7 @@ export default function Studio(){
     };
     
 
-    const getReplicateResults = async (image, mask) => {
+    const getReplicateResults = async (image) => {
 
         setIsLoadingVisible(true)
 
@@ -81,9 +81,9 @@ export default function Studio(){
             prompt: promptText + ", photorealistic, high resolution product photography, don't modify product",
             negative_prompt: "blurry, painting, cartoon, abstract, ugly, deformed",
             image: image,
-            mask: mask,
+            structure: "canny",
             num_outputs: 4,
-            guidance_scale: 7.5,
+            // guidance_scale: 7.5,
           }),
         });
         let prediction = await response.json();
@@ -132,15 +132,6 @@ export default function Studio(){
 
         try {
 
-            const response = await fetch('http://127.0.0.1:5000/get_item_mask', {
-              method: 'POST',
-              body: formData
-            });
-    
-            console.log(response)
-            const data = await response.json();
-            let maskBase64Url = `data:image/jpeg;base64,${data.ai_mask}`
-
             setIsResultVisible(false)
             let imageURLTemp = "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
             
@@ -152,7 +143,7 @@ export default function Studio(){
                 const imageBase64Url = reader.result;
 
                 // now send a request to replicate
-                await getReplicateResults(imageBase64Url ,maskBase64Url)
+                await getReplicateResults(imageBase64Url)
 
             };
         } catch (error) {

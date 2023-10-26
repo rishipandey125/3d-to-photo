@@ -9,12 +9,8 @@ export default async function handler(req, res) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // Pinned to a specific version of Stable Diffusion
-        // See https://replicate.com/stability-ai/stable-diffussion/versions
-        // inpainting
-        //model: "andreasjansson/stable-diffusion-inpainting",
-        version: "e490d072a34a94a11e9711ed5a6ba621c3fab884eda1665d9d3a282d65a21180", // SD 1.5 inpainting
-        //version: "f9bb0632bfdceb83196e85521b9b55895f8ff3d1d3b487fd1973210c0eb30bec", // SD v2 inpainting
+        //https://replicate.com/rossjillian/controlnet
+        version: "795433b19458d0f4fa172a7ccf93178d2adb1cb8ab2ad6c8fdc33fdbcd49f477",
         // This is the text prompt that will be submitted by a form on the frontend
         input: req.body,
       }),
